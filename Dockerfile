@@ -1,3 +1,8 @@
+FROM node:latest AS node_base
+
+RUN echo "NODE Version:" && node --version
+RUN echo "NPM Version:" && npm --version
+
 # Use the official PHP image as base
 FROM php:8.3-apache
 
@@ -10,6 +15,12 @@ RUN apt-get update && \
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Install Node
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash
+RUN apt-get install --yes nodejs
+RUN node -v
+RUN npm -v
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
