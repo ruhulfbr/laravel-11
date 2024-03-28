@@ -1,8 +1,3 @@
-FROM node:latest AS node_base
-
-RUN echo "NODE Version:" && node --version
-RUN echo "NPM Version:" && npm --version
-
 # Use the official PHP image as base
 FROM php:8.3-apache
 
